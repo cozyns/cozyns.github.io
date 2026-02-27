@@ -2,12 +2,14 @@
 header {
     background-color: var(--background-light);
     transition: background-color 0.5s, color 0.5s;
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 10%;
     padding-right: 10%;
     min-height: 70px;
+    z-index: 1001;
     -webkit-animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
