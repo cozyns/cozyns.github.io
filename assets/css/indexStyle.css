@@ -1,5 +1,5 @@
 html {
-    min-width: 300px;
+    min-width: 320px;
 }
 
 body {
@@ -228,7 +228,7 @@ body {
 }
 
 .bio p {
-    margin-left: 15px;
+    margin: 0 0 0 15px;
 }
 
 [data-theme="dark"] .bio {
@@ -251,5 +251,34 @@ body {
 @keyframes moveTail {
     to {
         --angle: 360deg;
+    }
+}
+
+/* ******************** */
+/* Mobile settings */
+@media (max-width: 768px) {
+    .top {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left,
+    .right {
+        width: 100%;
+        height: auto;
+    }
+
+    .bio-section {
+        margin-top: 5%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bio {
+        width: 80%;
+        height: auto;
+        padding-bottom: 20px;
     }
 }
