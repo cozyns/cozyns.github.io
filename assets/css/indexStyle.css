@@ -17,38 +17,40 @@ body {
     color: var(--text-dark);
 }
 
-.full-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-}
+@media (hover: hover) {
+    .full-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
 
-.full-background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/assets/images/wallpaper.webp');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.15;
-    mask: inherit;
-    -webkit-mask: inherit;
-}
+    .full-background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: var(--wallpaper);
+        background-size: cover;
+        background-position: center;
+        opacity: 0.15;
+        mask: inherit;
+        -webkit-mask: inherit;
+    }
 
-.spotlight {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    .spotlight {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
 }
 
 /* Main loader */
@@ -185,61 +187,40 @@ body {
     height: 100%;
 }
 
-.right {
-    /* background-color: rgb(255, 0, 0); */
-    width: 100%;
-    height: 100%;
-}
-
 .bio-section {
     /* background-color: rgb(0, 0, 0); */
     position: relative;
     width: 100%;
     height: 50%;
-    margin-top: 20%;
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bio {
     /* tail varable */
-    --tail-color: #ff00ff;  
-    --tail-length: 80deg;    
+    --tail-color: #ff00ff;
+    --tail-length: 80deg;
     --speed: 3s;
 
     background:
-        linear-gradient(var(--accent-light), var(--accent-light)) padding-box,
-        conic-gradient(
-            from var(--angle),
+        linear-gradient(var(--accent-light), var(--background-light) 90%) padding-box,
+        conic-gradient(from var(--angle),
             var(--primary-light) calc(var(--tail-length)*0.8),
             var(--secondary-light) calc(var(--tail-length)/2),
-            var(--background-light) calc(var(--tail-length)/3)
-        ) border-box;
+            var(--background-light) calc(var(--tail-length)/3)) border-box;
 
     border: 4px solid transparent;
     border-radius: 30px;
     animation: moveTail var(--speed) cubic-bezier(0.65, 0, 0.35, 1) infinite;
 
     /* Shape */
-    width: 50%;
-    height: 250px;
-}
-
-.bio h1 {
-    margin-left: 15px;
-}
-
-.bio p {
-    margin: 0 0 0 15px;
-}
-
-[data-theme="dark"] .bio {
-    background:
-        linear-gradient(var(--accent-dark), var(--accent-dark)) padding-box,
-        conic-gradient(
-            from var(--angle),
-            var(--primary-dark) calc(var(--tail-length)*0.8),
-            var(--secondary-dark) calc(var(--tail-length)/2),
-            var(--background-dark) calc(var(--tail-length)/3)
-        ) border-box;
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    height: auto;
+    padding: 0 0 5px 0;
 }
 
 @property --angle {
@@ -252,6 +233,103 @@ body {
     to {
         --angle: 360deg;
     }
+}
+
+[data-theme="dark"] .bio {
+    background:
+        linear-gradient(var(--accent-dark), var(--background-dark) 90%) padding-box,
+        conic-gradient(from var(--angle),
+            var(--primary-dark) calc(var(--tail-length)*0.8),
+            var(--secondary-dark) calc(var(--tail-length)/2),
+            var(--background-dark) calc(var(--tail-length)/3)) border-box;
+}
+
+.bio .profile-pic {
+    flex-shrink: 0;
+    margin: 5px 0 0 5px;
+    width: 150px;
+    height: 150px;
+    background-image: var(--profile-pic);
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+}
+
+.bio .top-content {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    padding: 10% 0 0 5%;
+}
+
+.bio .bottom-content {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 15px;
+    width: 100%;
+    padding: 10px 0 0 0;
+    gap: 5px;
+}
+
+.bio h1 {
+    margin: 0;
+    width: max-content;
+    height: max-content;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--primary-light);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .bio h1 {
+    background-color: var(--primary-dark);
+}
+
+@media (hover: hover) {
+    .bio h1:hover {
+        background-color: var(--secondary-light);
+        transform: translateY(-4px);
+    }
+
+    [data-theme="dark"] .bio h1:hover {
+        background-color: var(--secondary-dark);
+    }
+}
+
+.bio p {
+   margin: 0;
+   max-width: 80%;
+    width: max-content;
+    height: max-content;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: var(--primary-light);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .bio p {
+    background-color: var(--primary-dark);
+}
+
+@media (hover: hover) {
+    .bio p:hover {
+        background-color: var(--secondary-light);
+        transform: translateY(-4px);
+    }
+
+    [data-theme="dark"] .bio p:hover {
+        background-color: var(--secondary-dark);
+    }
+}
+
+.right {
+    /* background-color: rgb(255, 0, 0); */
+    width: 100%;
+    height: 100%;
 }
 
 /* ******************** */
@@ -271,14 +349,28 @@ body {
     .bio-section {
         margin-top: 5%;
         height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .bio {
+        flex-direction: column;
+        align-items: center;
         width: 80%;
         height: auto;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .bio .profile-pic {
+        margin: 20px 0 0 0;
+    }
+
+    .bio .top-content {
+        justify-content: center;
+        padding: 20px 0 0 0;
+    }
+
+    .bio .bottom-content {
+        align-items: center;
+        margin: 0;
+        padding: 20px 0 0 0;
     }
 }

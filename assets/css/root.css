@@ -12,4 +12,9 @@
     --primary-dark: #3b1282;
     --secondary-dark: rgb(28, 7, 59);
     --accent-dark: #6700c2;
+
+    /* images */
+    --logo : url('/assets/images/logo.svg');
+    --wallpaper: url('/assets/images/wallpaper.webp');
+    --profile-pic: url('/assets/images/profile.webp');
 }

@@ -59,13 +59,13 @@ header h1 {
 }
 
 .typing-cursor:after {
-    content: '|';
+    content: 'I';
     animation: blink 0.7s infinite;
     margin-left: 2px;
 }
 
 .typing-dots:after {
-    content: '|';
+    content: '.';
     animation: blink 0.7s infinite;
     margin-left: 2px;
 }
