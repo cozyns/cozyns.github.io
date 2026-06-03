@@ -290,7 +290,6 @@ body {
 @media (hover: hover) {
     .bio h1:hover {
         background-color: var(--secondary-light);
-        transform: translateY(-4px);
     }
 
     [data-theme="dark"] .bio h1:hover {
@@ -299,8 +298,8 @@ body {
 }
 
 .bio p {
-   margin: 0;
-   max-width: 80%;
+    margin: 0;
+    max-width: 80%;
     width: max-content;
     height: max-content;
     text-align: center;
@@ -318,7 +317,6 @@ body {
 @media (hover: hover) {
     .bio p:hover {
         background-color: var(--secondary-light);
-        transform: translateY(-4px);
     }
 
     [data-theme="dark"] .bio p:hover {
@@ -327,9 +325,153 @@ body {
 }
 
 .right {
-    /* background-color: rgb(255, 0, 0); */
     width: 100%;
     height: 100%;
+}
+
+.timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    margin-left: 5px;
+    gap: 2rem;
+    padding-left: 2rem;
+}
+
+.timeline::before,
+.timeline::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    bottom: auto;
+    height: calc(100% - 12px);
+    transform: translateY(-50%);
+    width: 2px;
+}
+
+.timeline::before {
+    background-color: var(--background-dark);
+}
+
+[data-theme="dark"] .timeline::before {
+    background-color: var(--background-light);
+}
+
+.timeline::after {
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            transparent calc(var(--beam-pos, 0%) - 8%),
+            var(--primary-light) calc(var(--beam-pos, 0%) - 4%),
+            var(--primary-light) var(--beam-pos, 0%),
+            var(--primary-light) calc(var(--beam-pos, 0%) + 4%),
+            transparent calc(var(--beam-pos, 0%) + 8%),
+            transparent 100%);
+    animation: beam-travel 2.5s ease-in-out infinite;
+}
+
+[data-theme="dark"] .timeline::after {
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            transparent calc(var(--beam-pos, 0%) - 8%),
+            var(--primary-dark) calc(var(--beam-pos, 0%) - 4%),
+            var(--primary-dark) var(--beam-pos, 0%),
+            var(--primary-dark) calc(var(--beam-pos, 0%) + 4%),
+            transparent calc(var(--beam-pos, 0%) + 8%),
+            transparent 100%);
+}
+
+@keyframes beam-travel {
+    0% {
+        --beam-pos: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        --beam-pos: 100%;
+        opacity: 0;
+    }
+}
+
+@property --beam-pos {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+}
+
+.card-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -2.1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    border: 2px solid var(--background-dark);
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+[data-theme="dark"] .timeline-dot {
+    background-color: var(--primary-dark);
+    border: 2px solid var(--background-light);
+}
+
+.card {
+    display: flex;
+    width: 80%;
+    height: 150px;
+    border-radius: 20px;
+    background-color: var(--primary-light);
+    padding-left: 20px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+[data-theme="dark"] .card {
+    background-color: var(--primary-dark);
+}
+
+@media (hover: hover) {
+    .card:hover {
+        background-color: var(--secondary-light);
+        cursor: pointer;
+        transform: translateY(-4px);
+    }
+}
+
+[data-theme="dark"] .card:hover {
+    background-color: var(--secondary-dark);
+}
+
+.card-content {
+    width: 100%;
+    padding: 20px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.card-content h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.card-content p {
+    margin: 0;
+    padding: 0;
 }
 
 /* ******************** */
@@ -347,7 +489,7 @@ body {
     }
 
     .bio-section {
-        margin-top: 5%;
+        margin-top: 0;
         height: auto;
     }
 
@@ -372,5 +514,40 @@ body {
         align-items: center;
         margin: 0;
         padding: 20px 0 0 0;
+    }
+
+    .timeline {
+        padding-left: 0;
+        /* remove left offset */
+        align-items: center;
+        /* center the card-wrappers */
+    }
+
+    /* Hide the line and beam on mobile */
+    .timeline::before,
+    .timeline::after {
+        display: none;
+    }
+
+    .card-wrapper {
+        justify-content: center;
+        /* center card inside wrapper */
+        width: 100%;
+    }
+
+    .timeline-dot {
+        display: none;
+    }
+
+    .card {
+        width: 80%;
+        height: auto;
+        min-height: 100px;
+        padding: 1rem 1.25rem;
+        border-left: 3px solid var(--primary-dark);
+    }
+
+    [data-theme="dark"] .card {
+        border-left: 3px solid var(--primary-light);
     }
 }
